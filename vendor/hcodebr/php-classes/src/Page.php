@@ -12,13 +12,13 @@ class Page{
 		"data" => []];
 	private $options = [];
 
-	public function  __construct($opts = array()){
+	public function  __construct($opts = array(), $tpl_dir = "/views/"){
 
 		$this->options = array_merge($this->defaults, $opts); //mesclando novas opçoes recebidas com as padroes
 
 
 		$config = array(
-					"tpl_dir"       => $_SERVER['DOCUMENT_ROOT']."/views/", 			// local do template
+					"tpl_dir"       => $_SERVER['DOCUMENT_ROOT'].$tpl_dir, 			// local do template
 					"cache_dir"     => $_SERVER['DOCUMENT_ROOT']."/views-cache/",		// pasta cache
 					"debug"         => false // set to false to improve the speed
 				   );
