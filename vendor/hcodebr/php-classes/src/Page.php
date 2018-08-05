@@ -9,7 +9,9 @@ class Page{
 
 	private $tpl;
 	private $defaults = [      //Configurações padroes
-		"data" => []];
+		"data" 		=> [],
+		"header"    => true,
+		"footer"	=> true];
 	private $options = [];
 
 	public function  __construct($opts = array(), $tpl_dir = "/views/"){
@@ -29,7 +31,9 @@ class Page{
 
 		$this->setData($this->options["data"]); //passar os dados para o template
 
-		$this->tpl->draw("header"); //colocando na pagina o header.
+		if($this->options["header"] === true){
+			$this->tpl->draw("header"); //colocando na pagina o header.
+		}
 	}
 
 	private function setData($data = array()){
@@ -46,9 +50,9 @@ class Page{
 
 
 	public function __destruct(){
-
-		$this->tpl->draw("footer"); //colocando o footer na pagina
-
+		if($this->options["header"] === true){
+			$this->tpl->draw("footer"); //colocando o footer na pagina
+		}
 	}
 
 
