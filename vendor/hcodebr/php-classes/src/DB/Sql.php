@@ -47,6 +47,7 @@ class Sql {
 
 		$this->setParams($stmt, $params);
 
+		var_dump($params);
 		$stmt->execute();
 
 	}
