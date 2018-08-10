@@ -32,9 +32,61 @@ $app->post("/admin/products/create", function(){
 
 	$product = new Product();
 
+
+	$product->setData($_POST);
 	$product->save();
 
 	header("Location: /admin/products");
 	exit;
+});
+
+$app->get("/admin/products/:idproduct", function($idproduct){
+
+	User::verifyLogin();
+
+	$product = new Product();
+
+	$product->get((int)$idproduct);
+
+	$page = new PageAdmin();
+
+	$page->setTpl("products-update", [
+		"product"=>$product->getValues()
+	]);
+
+});
+
+$app->post("/admin/products/:idproduct", function($idproduct){
+
+	User::verifyLogin();
+
+	$product = new Product();
+
+	$product->get((int)$idproduct);
+
+	$product->setPhoto($_FILES['file']);
+
+	$product->setData($_POST);
+
+	$product->save();
+
+	header("Location: /admin/products");
+	exit;
+
+});
+
+$app->get("/admin/products/:idproduct/delete", function($idproduct){
+
+	User::verifyLogin();
+
+	$product = new Product();
+
+	$product->get((int)($idproduct));
+
+	$product->delete();
+
+	header("Location: /admin/products");
+	exit;
+
 });
 ?>
